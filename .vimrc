@@ -1,43 +1,40 @@
-" zxj's vim配置
-" ================================================================================================
-" Vundle配置部分
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
- 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
- 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
+" vim-plug配置文件
+call plug#begin('~/.vim/plugged')
 
 "自定义插件列表开始
-
-Plugin 'maralla/completor.vim' 
-Plugin 'vim-scripts/indentpython.vim'	
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
+Plug 'maralla/completor.vim' 
+Plug 'vim-scripts/indentpython.vim'   
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'tell-k/vim-autopep8'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+Plug 'bling/vim-bufferline'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'bling/vim-airline'
 
 " 自定义插件列表结束
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
 
+call plug#end()
 
 " 插件相关设置
 let g:completor_python_binary = '/usr/bin/python' " 补全设置
+"let g:completor_clang_binary = '/path/to/clang'
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+"let g:completor_node_binary = '/path/to/node'
+"let g:completor_racer_binary = '/path/to/racer'
+"let g:completor_gocode_binary = '/path/to/gocode'
 map <C-n> :NERDTreeToggle<CR> " 开关树形目录的快捷键
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$'] " 设置忽略.pyc文件
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR> " 设置快捷键F8代替:Autopep8 
-
+let g:pymode_python = 'python3' " python-mode 配置
  
 " 基础设置
 
@@ -52,14 +49,22 @@ set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
 
+set foldmethod=indent
+set foldlevel=99
+ 
+" press space to fold/unfold code
+nnoremap <space> za
+vnoremap <space> zf
 
-set tabstop=4   "tab宽度
-set softtabstop=4 
-set shiftwidth=4  
-set textwidth=79  "行最大宽度
-set expandtab       "tab替换为空格键
-set autoindent      "自动缩进
-set fileformat=unix   "保存文件格式
+" 为py文件添加下支持pep8风格的配置
+au BufNewFile,BufRead *.py
+\ set tabstop=4   "tab宽度
+\ set softtabstop=4 
+\ set shiftwidth=4  
+\ set textwidth=79  "行最大宽度
+\ set expandtab       "tab替换为空格键
+\ set autoindent      "自动缩进
+\ set fileformat=unix   "保存文件格式
 
 " 如果想让新窗口在右边或者下方打开，添加配置
 set splitbelow
@@ -67,8 +72,8 @@ set splitright
 
 " 一键执行各种代码
 """"""""""""""""""""""
-""" Quickly Run
-""""""""""""""""""""""
+    "Quickly Run
+    """"""""""""""""""""""
     map <F5> :call CompileRunGcc()<CR>
     func! CompileRunGcc()
         exec "w"
