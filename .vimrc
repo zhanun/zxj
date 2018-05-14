@@ -119,6 +119,12 @@ set backspace=indent,eol,start
 
 "----------Stop python PEP 8 stuff--------------
 
+" 全栈开发，你可以设置针对每种文件类型设置au命令
+au BufNewFile,BufRead *.js, *.html, *.css
+\ set tabstop=2
+\ set softtabstop=2
+\ set shiftwidth=2
+
 " 如果想让新窗口在右边或者下方打开，添加配置
 set splitbelow
 set splitright
