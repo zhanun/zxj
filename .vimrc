@@ -97,13 +97,17 @@ set fenc=utf-8      "编码
 set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
-"set guifont=Monaco:h13  
-"关闭 swap files
-set noswapfile
-
-
-" 开启系统剪贴板
-set clipboard=unnamed
+"set guifont=Monaco:h13  "设置字体
+"set background=dark     "设置背景色
+"colorscheme solarized 
+set showmatch "显示匹配的括号"
+"set laststatus=2 "命令行为两行"
+set selection=exclusive 
+set selectmode=mouse,key
+set cursorline "突出显示当前行" 
+set cursorcolumn "突出显示当前列"
+set noswapfile  "关闭 swap files
+set clipboard=unnamed  "开启系统剪贴板
 
 " 开启代码自动折叠，修改快捷键空格折叠展开
 set foldmethod=indent
