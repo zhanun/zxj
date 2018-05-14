@@ -97,7 +97,7 @@ set fenc=utf-8      "编码
 set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
-
+"set guifont=Monaco:h13  
 "关闭 swap files
 set noswapfile
 
