@@ -52,9 +52,9 @@ set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
 
+" 开启代码自动折叠，修改快捷键空格折叠展开
 set foldmethod=indent
 set foldlevel=99
- 
 " press space to fold/unfold code
 nnoremap <space> za
 vnoremap <space> zf
