@@ -1,7 +1,7 @@
 " vim-plug配置文件
 call plug#begin('~/.vim/plugged')
 
-"自定义插件列表开始
+"自定义插件列表开始=======================
 Plug 'maralla/completor.vim' 
 Plug 'vim-scripts/indentpython.vim'   
 Plug 'vim-syntastic/syntastic'
@@ -17,9 +17,12 @@ Plug 'bling/vim-bufferline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bling/vim-airline'
 
-" 自定义插件列表结束
+" 自定义插件列表结束======================
 
 call plug#end()
+
+" 设置前导键leader为空格键
+let mapleader = "\<space>"
 
 " 插件相关设置
 let g:completor_python_binary = '/usr/bin/python' " 补全设置
