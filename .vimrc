@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'maralla/completor.vim' 
 Plug 'vim-scripts/indentpython.vim'   
 Plug 'vim-syntastic/syntastic'
+"Plug 'w0rp/ale'
 Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -20,7 +21,7 @@ Plug 'python-mode/python-mode', { 'branch': 'develop' }
 "Plug 'bling/vim-bufferline'
 Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-airline'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " 自定义插件列表结束======================
 call plug#end()
@@ -31,6 +32,45 @@ call plug#end()
 let mapleader = "\<space>"
 
 " 插件相关设置
+
+"异步插件设置======================
+"下面这句不设置就是检测所有，设置后只检测设置的
+"let g:ale_linters = {
+"\   'javascript': ['eslint'],
+"\   'python': ['flake8', 'pylint'],
+"\}
+
+" Check Python files with flake8 and pylint.
+"let b:ale_linters = ['flake8', 'pylint']
+
+" Fix Python files with autopep8 and yapf.
+"let b:ale_fixers = ['autopep8', 'yapf']
+
+" Disable warnings about trailing whitespace for Python files.
+"let b:ale_warn_about_trailing_whitespace = 0
+" Show 5 lines of errors (default: 10)
+
+"let g:ale_list_window_size = 5
+
+" 开启异步检测插件airline接口
+"let g:airline#extensions#ale#enabled = 1
+
+" 没有状态栏插件时，用下面函数创建
+"function! LinterStatus() abort
+"    let l:counts = ale#statusline#Count(bufnr(''))
+"
+"    let l:all_errors = l:counts.error + l:counts.style_error
+"    let l:all_non_errors = l:counts.total - l:all_errors
+"
+"    return l:counts.total == 0 ? 'OK' : printf(
+"    \   '%dW %dE',
+"    \   all_non_errors,
+"    \   all_errors
+"    \)
+"endfunction
+"set statusline=%{LinterStatus()}
+" ==========================
+
 let g:completor_python_binary = '/usr/bin/python' " 补全设置
 "let g:completor_clang_binary = '/path/to/clang'
 
@@ -138,27 +178,27 @@ set splitright
 """"""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-  exec "w"
+    exec "w"
 if &filetype == 'c'
-  exec "!g++ % -o %<"
-  exec "!time ./%<"
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
 elseif &filetype == 'cpp'
-  exec "!g++ % -o %<"
-  exec "!time ./%<"
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
 elseif &filetype == 'java'
-  exec "!javac %"
-  exec "!time java %<"
+    exec "!javac %"
+    exec "!time java %<"
 elseif &filetype == 'sh'
-  :!time bash %
+    :!time bash %
 elseif &filetype == 'python'
-  exec "!time python2.7 %"
+    exec "!time python2.7 %"
 elseif &filetype == 'html'
-  exec "!firefox % &"
+    exec "!firefox % &"
 elseif &filetype == 'go'
-  "  exec "!go build %<"
-  exec "!time go run %"
+"    exec "!go build %<"
+    exec "!time go run %"
 elseif &filetype == 'mkd'
-  exec "!~/.vim/markdown.pl % > %.html &"
-  exec "!firefox %.html &"
+    exec "!~/.vim/markdown.pl % > %.html &"
+    exec "!firefox %.html &"
 endif
-  endfunc
+    endfunc
