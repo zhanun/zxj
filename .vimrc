@@ -58,6 +58,10 @@ set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
 
+"关闭 swap files
+set noswapfile
+
+
 " 开启系统剪贴板
 set clipboard=unnamed
 
@@ -67,6 +71,18 @@ set foldlevel=99
 " press space to fold/unfold code
 nnoremap <space> za
 vnoremap <space> zf
+
+" 开启python识别虚拟环境，如果不兼容可注释掉
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUA_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  sys.path.insert(0, project_base_dir)
+  activate_this = os.path.join(project_base_dir,'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 " 为py文件添加下支持pep8风格的配置
 
