@@ -73,6 +73,7 @@ nnoremap <space> za
 vnoremap <space> zf
 
 " 开启python识别虚拟环境，如果不兼容可注释掉
+" 如果报错，尝试 sudo apt install vim-nox-py2
 py << EOF
 import os.path
 import sys
