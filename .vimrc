@@ -1,4 +1,7 @@
-" vim-plug配置文件
+" vim-plug配置文件================
+" vim-plus安装：
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 
 "自定义插件列表开始=======================
@@ -18,8 +21,9 @@ Plug 'jeetsukumaran/vim-buffergator'
 Plug 'bling/vim-airline'
 
 " 自定义插件列表结束======================
-
 call plug#end()
+" vim-plug配置结束================
+
 
 " 设置前导键leader为空格键
 let mapleader = "\<space>"
