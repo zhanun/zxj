@@ -17,7 +17,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'bling/vim-bufferline'
+"Plug 'bling/vim-bufferline'
 Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'bling/vim-airline'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
