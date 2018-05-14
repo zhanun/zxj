@@ -10,6 +10,7 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Yggdroot/indentLine'
 Plug 'tell-k/vim-autopep8'
 Plug 'jiangmiao/auto-pairs'
@@ -18,7 +19,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'bling/vim-bufferline'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'bling/vim-airline'
+"Plug 'bling/vim-airline'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " 自定义插件列表结束======================
 call plug#end()
@@ -56,6 +58,9 @@ set mouse=a        "启用鼠标
 set hlsearch        "搜索高亮
 syntax on    "语法高亮
 
+" 开启系统剪贴板
+set clipboard=unnamed
+
 " 开启代码自动折叠，修改快捷键空格折叠展开
 set foldmethod=indent
 set foldlevel=99
@@ -64,23 +69,50 @@ nnoremap <space> za
 vnoremap <space> zf
 
 " 为py文件添加下支持pep8风格的配置
-au BufNewFile,BufRead *.py
-\ set tabstop=4   "tab宽度
-\ set softtabstop=4 
-\ set shiftwidth=4  
-\ set textwidth=79  "行最大宽度
-\ set expandtab       "tab替换为空格键
-\ set autoindent      "自动缩进
-\ set fileformat=unix   "保存文件格式
+
+let python_highlight_all=1
+"------------Start Python PEP 8 stuff----------------
+" Number of spaces that a pre-existing tab is equal to.
+au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=4
+
+"spaces for indents
+au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py,*.pyw set autoindent
+au BufRead,BufNewFile *.py set softtabstop=4
+
+" Use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+
+" Display tabs at the beginning of a line in Python mode as bad.
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+" Make trailing whitespace be flagged as bad.
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Wrap text after a certain number of characters
+au BufRead,BufNewFile *.py,*.pyw, set textwidth=80
+
+" Use UNIX (\n) line endings.
+au BufNewFile *.py,*.pyw,*.c,*.h set fileformat=unix
+
+" Keep indentation level from previous line:
+autocmd FileType python set autoindent
+
+" make backspaces more powerfull
+set backspace=indent,eol,start
+
+"----------Stop python PEP 8 stuff--------------
 
 " 如果想让新窗口在右边或者下方打开，添加配置
 set splitbelow
 set splitright
+" :sv <filename>命令纵向分割布局打开一个文件
+"  相反的命令:vs <filename> 横向分割布局
 
 " 一键执行各种代码
 """"""""""""""""""""""
-    "Quickly Run
-    """"""""""""""""""""""
+"""Quickly Run
+""""""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
